@@ -1,15 +1,24 @@
 #!/bin/bash -x
-read -p "enter the input" a
-read -p "enter the input" b
-read -p "enter the input" c
-sum=$(($a+$b*$c))
-dict[op1]="$sum"
-sum1=$(($a*$b+$c))
-dict[op2]="$sum1"
-sum2=$(($c+$a/$b))
-dict[op3]="$sum2"
-sum3=$(($a%$b+$c))
-dict[op4]="$sum3"
 
+read -p "Enter input a : " a
+read -p "Enter input b : " b
+read -p "Enter input c : " c
 
+declare -A operationDic
+declare -a operationArray
+operation1=$(($a+$b*$c))
+operation2=$(($a*$b+$c))
+operation3=$(($a+$b/$c))
+operation4=$(($a%$b+$c))
 
+for (( i=1 ; i<=4 ; i++ ))
+do
+	operationDic[$i]=$((operation$i))
+done
+
+for (( j=0 ; j<4 ; j++ ))
+do
+	operationArray[$j]=${operationDic[$(($j+1))]}
+done
+
+printf '%s\n' "${operationArray[@]}" | sort -n
