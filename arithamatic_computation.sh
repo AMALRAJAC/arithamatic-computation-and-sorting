@@ -1,4 +1,3 @@
-
 #!/bin/bash -x
 
 read -p "Enter input a : " a
@@ -16,3 +15,10 @@ for (( i=1 ; i<=4 ; i++ ))
 do
 	operationDic[$i]=$((operation$i))
 done
+
+for (( j=0 ; j<4 ; j++ ))
+do
+	operationArray[$j]=${operationDic[$(($j+1))]}
+done
+
+printf '%s\n' "${operationArray[@]}" | sort -nr
